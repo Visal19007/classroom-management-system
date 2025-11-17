@@ -13,7 +13,13 @@ return new class extends Migration
     {
         Schema::create('classrooms', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('teacher_id');
+            $table->string('name');
+            $table->string('code')->nullable()->unique();
+            $table->string('academic_year')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
+            $table->foreign('teacher_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

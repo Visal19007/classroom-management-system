@@ -13,7 +13,15 @@ return new class extends Migration
     {
         Schema::create('attendances', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('classroom_id');
+            $table->unsignedBigInteger('student_id');
+            $table->date('date');
+            $table->enum('status', ['present','absent','late','excused'])->default('present');
+            $table->string('remark')->nullable();
             $table->timestamps();
+            $table->unique(['classroom_id','student_id','date']);
+            $table->foreign('classroom_id')->references('id')->on('classrooms')->onDelete('cascade');
+            $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
         });
     }
 

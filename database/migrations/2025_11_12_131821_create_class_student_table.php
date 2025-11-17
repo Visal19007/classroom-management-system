@@ -13,7 +13,14 @@ return new class extends Migration
     {
         Schema::create('class_student', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('classroom_id');
+            $table->unsignedBigInteger('student_id');
+            $table->date('enrolled_date')->nullable();
+            $table->string('status')->default('active'); // active, left, suspended
             $table->timestamps();
+            $table->unique(['classroom_id','student_id']);
+            $table->foreign('classroom_id')->references('id')->on('classrooms')->onDelete('cascade');
+            $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
         });
     }
 
