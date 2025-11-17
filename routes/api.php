@@ -7,7 +7,7 @@ use App\Http\Controllers\Api\GradeController;
 use App\Http\Controllers\Api\NoticeController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('auth:sanctum')->group(function(){
+// Route::middleware('auth:sanctum')->group(function(){
     Route::apiResource('classrooms', ClassroomController::class);
     Route::apiResource('students', StudentController::class);
     Route::post('students/{student}/enroll',[StudentController::class,'enroll']);
@@ -21,5 +21,5 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::get('grades/class/{classroom}',[GradeController::class,'getClassGradebook']);
 
     Route::apiResource('notices', NoticeController::class)->only(['index','store','show','destroy']);
-});
+// });
 
